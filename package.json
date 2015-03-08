@@ -1,0 +1,63 @@
+{
+  "name": "helloblock-faucet",
+  "version": "0.0.1",
+  "description": "Bitcoin programmatic faucet.",
+  "author": "Fomichev Kirill <fanatid@ya.ru>",
+  "main": "lib/index.js",
+  "repository": {
+    "type": "git",
+    "url": "git@github.com:fanatid/helloblock-faucet.git"
+  },
+  "bugs": {
+    "url": "https://github.com/fanatid/helloblock-faucet/issues"
+  },
+  "license": "MIT",
+  "keywords": [
+    "bitcoin",
+    "mainnet",
+    "testnet3",
+    "faucet"
+  ],
+  "files": [
+    "lib",
+    "LICENSE",
+    "README.md"
+  ],
+  "scripts": {
+    "build": "npm run-script compile && npm run-script uglify",
+    "compile": "browserify lib/index.js -s HelloblockFaucet -o helloblock-faucet.js",
+    "compile_test": "browserify test/*.js -o helloblock-faucet.test.js",
+    "coverage": "istanbul cover _mocha -- test/*.js",
+    "coveralls": "npm run-script coverage && coveralls <coverage/lcov.info",
+    "clean": "rm -f helloblock-faucet.js helloblock-faucet.min.js helloblock-faucet.test.js",
+    "lint": "standard",
+    "uglify": "uglify -s helloblock-faucet.js -o helloblock-faucet.min.js",
+    "test": "istanbul test mocha -- --reporter spec test/*.js"
+  },
+  "dependencies": {
+    "browser-request": "^0.3.3",
+    "bs58check": "^1.0.4",
+    "request": "^2.53.0",
+    "setimmediate": "^1.0.2"
+  },
+  "devDependencies": {
+    "bitcoinjs-lib": "^1.5.0",
+    "browserify": "^9.0.3",
+    "chai": "^2.1.1",
+    "coveralls": "^2.11.2",
+    "istanbul": "^0.3.7",
+    "mocha": "^2.2.0",
+    "standard": "^2.10.0",
+    "uglify": "^0.1.1"
+  },
+  "browser": {
+    "request": "browser-request"
+  },
+  "standard": {
+    "ignore": [
+      "helloblock-faucet.js",
+      "helloblock-faucet.min.js",
+      "helloblock-faucet.test.js"
+    ]
+  }
+}
